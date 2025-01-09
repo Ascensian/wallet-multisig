@@ -64,3 +64,8 @@ $ forge --help
 $ anvil --help
 $ cast --help
 ```
+
+forge script script/MultiSigWallet.s.sol:MultiSigWalletDeploy \
+    --rpc-url https://eth-sepolia.g.alchemy.com/v2/QZlZQJ_Z9QOzzgPhMbsga7q1ihB2VLCY \
+    --private-key MET_TA_CLE_PRIVEE \
+    --broadcast
