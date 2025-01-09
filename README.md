@@ -1,17 +1,28 @@
-## Foundry
+# MultiSigWallet Project
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+**MultiSigWallet** est un contrat Ethereum permettant à plusieurs signataires de valider et d’exécuter des transactions. Il impose un nombre minimum de confirmations avant de pouvoir exécuter des transferts d’ETH ou des appels de fonction externes.
 
-Foundry consists of:
+---
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+## Fonctionnalités principales
 
-## Documentation
+1. **Soumission de transactions**  
+   - Un signataire peut soumettre une transaction comprenant :
+     - L’adresse destinataire (`to`)  
+     - Le montant en ETH à transférer (`value`)  
+     - Les données d’appel (`data`)  
 
-https://book.getfoundry.sh/
+2. **Confirmation de transactions**  
+   - Chaque signataire peut confirmer ou révoquer sa confirmation pour chaque transaction.
+
+3. **Exécution de transactions**  
+   - Une transaction est exécutable lorsqu’elle atteint le nombre minimal de confirmations requis (défini à 2 par défaut).
+
+4. **Gestion des signataires**  
+   - Ajout/suppression de signataires tout en maintenant toujours au moins 3 signataires et 2 confirmations requises.
+
+5. **Utilisation de Foundry**  
+   - Tests unitaires et script de déploiement écrits en Foundry (`forge`, `cast`).
 
 ## Usage
 
@@ -27,45 +38,14 @@ $ forge build
 $ forge test
 ```
 
-### Format
+### Coverage
 
 ```shell
-$ forge fmt
+$ forge coverage
 ```
 
-### Gas Snapshots
+### Script de déploiement
 
 ```shell
-$ forge snapshot
+$ forge script script/MultiSigWallet.s.sol:MultiSigWalletDeploy --rpc-url $RPC_URL --private-key $PRIVATE_KEY --broadcast
 ```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
-
-forge script script/MultiSigWallet.s.sol:MultiSigWalletDeploy \
-    --rpc-url https://eth-sepolia.g.alchemy.com/v2/QZlZQJ_Z9QOzzgPhMbsga7q1ihB2VLCY \
-    --private-key MET_TA_CLE_PRIVEE \
-    --broadcast
